@@ -8,6 +8,8 @@
     <!-- <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> -->
     <script src="libs/react.js"></script>
     <script src="libs/react-dom.js"></script>
+    <style> 
+    </style>
 
 </head>
 
@@ -16,8 +18,8 @@
 </body>
 <script type="text/babel">
         class Greeter extends React.Component {
-            constructor(){
-                super();
+            constructor(props){
+                super(props);
                 this.state= {
                   greeting: ''
                 }
@@ -30,24 +32,44 @@
                 });
             }
             onGreetClicked() {
-                
+                // darf nur eine Variable haben->Variablen inline (kein "" + ""+ etc)
                 alert(`Hello, ${this.state.greeting}`);
             }
+            getCharsRemaining(){
+                //wie debugging nur leichter
+                console.log(this.props.maxLength);
+                console.log(this.state.greeting.length);
+                
+                return this.props.maxLength - this.state.greeting.length;
+            }
+            hasRemainingChars(){
+                return getCharsRemaining()>0;
+            }
+            isGreetingValid(){
+                return (this.state.greeting.length>0 &&
+                this.getCharsRemaining()>=0);
+            }
+
             render() {
+                const greetingValid = this.isGreetingValid();
                  return (
                     <div>
-                        Whaaasup:
+                        <form > 
+                        <span>Whaaasup: </span>
                         <input value={this.state.greeting}
                         onChange={(e)=>this.onGreetingChange(e)}>
                         </input>
+                        <span >{this.getCharsRemaining()}</span>
                         <button
-                         onClick={()=>this.onGreetClicked()}>Grüßchen
+                        disabled={!greetingValid}
+                        onClick={()=>this.onGreetClicked()}>Grüßchen
                         </button>
+                        </form>
                     </div>
                  );
             }
         }
-        ReactDOM.render(<Greeter/>, document.getElementById('greeterMountPoint'));
+        ReactDOM.render(<Greeter  maxLength={10}/>, document.getElementById('greeterMountPoint'));
         
     </script>
 
