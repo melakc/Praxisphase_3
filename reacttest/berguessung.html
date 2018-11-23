@@ -9,6 +9,13 @@
     <script src="libs/react.js"></script>
     <script src="libs/react-dom.js"></script>
     <style> 
+        .valid{
+            background-color:#ffcdd2;
+        }
+        .invalid{
+            background-color: #aac4f1;
+           
+        }
     </style>
 
 </head>
@@ -29,46 +36,133 @@
             onGreetingChange(event) {
                 this.setState({
                     greeting: event.target.value
+
                 });
             }
             onGreetClicked() {
                 // darf nur eine Variable haben->Variablen inline (kein "" + ""+ etc)
                 alert(`Hello, ${this.state.greeting}`);
+
+                this.setState({
+                    greeting:''
+                });
+                if(this.inputField){
+                    this.inputField.focus();
+                }
             }
             getCharsRemaining(){
                 //wie debugging nur leichter
                 console.log(this.props.maxLength);
                 console.log(this.state.greeting.length);
-                
-                return this.props.maxLength - this.state.greeting.length;
+                let charlength=this.props.maxLength - this.state.greeting.length;
+
+                if(charlength < 0){
+                    charlength == 0;
+                }
+
+                return charlength;
             }
             hasRemainingChars(){
-                return getCharsRemaining()>0;
+                console.log("callingHasRemChars");
+                return this.getCharsRemaining() > 0 ;
             }
             isGreetingValid(){
-                return (this.state.greeting.length>0 &&
-                this.getCharsRemaining()>=0);
+                return (this.state.greeting.length > 0 && this.getCharsRemaining() >= 0);
             }
-
-            render() {
-                const greetingValid = this.isGreetingValid();
-                 return (
-                    <div>
-                        <form > 
-                        <span>Whaaasup: </span>
-                        <input value={this.state.greeting}
-                        onChange={(e)=>this.onGreetingChange(e)}>
-                        </input>
-                        <span >{this.getCharsRemaining()}</span>
+            
+            // render() {
+                // const greetingValid = this.isGreetingValid();
+                // return (
+                    
+                    // <div>
+                        
+                    //     <span style={{backgroundColor:"#FFCDD2", fontSize:"2rem", color:"White", fontWeight:"bold"}}>First React Page</span>
+                    //     <form > 
+                    //     <span>Whaaasup: </span>
+                    //     <input 
+                    //         maxLength={this.props.maxLength}
+                    //         className={greetingValid ? 'valid':'invalid'} 
+                    //         value={this.state.greeting}
+                    //         onChange={(e)=>this.onGreetingChange(e)}
+                    //         // ref= { (c) =>  this.inputField = c }
+                    //          />
+                    //     <button
+                    //     disabled={ !greetingValid }
+                    //     onClick={ () => this.onGreetClicked() } > Grüßchen
+                    //     </button>
+                    //     <span className={!greetingValid?"break" : ""}
+                    //     style={{color:this.hasRemainingChars() ? 'green' : '#ff0000', fontSize:"1.2rem"}}
+                    //     >{this.getCharsRemaining()} chars remaining</span>
+                    //     </form>
+                    // </div>
+                //  );
+                
+                
+                function RemainingChars(props){
+                    const greetingValid = this.isGreetingValid();
+                    return(
+                        <span className={!greetingValid?"break" : ""}
+                            style={{color:this.hasRemainingChars() ? 'green' : '#ff0000', fontSize:"1.2rem"}} >
+                           {this.getCharsRemaining()} chars remaining 
+                        </span> 
+                    );
+                }
+               function InputField(props){
+                    const greetingValid = this.isGreetingValid();
+                    return(
+                        <input 
+                            maxLength={this.props.maxLength}
+                            className={greetingValid ? 'valid':'invalid'} 
+                            value={this.state.greeting}
+                            onChange={(e)=>this.onGreetingChange(e)}
+                            // ref= { (c) =>  this.inputField = c }
+                             />
+                    );
+                }
+                function ButtonSend(props){
+                    const greetingValid = this.isGreetingValid();
+                    return(
                         <button
-                        disabled={!greetingValid}
-                        onClick={()=>this.onGreetClicked()}>Grüßchen
-                        </button>
+                        disabled={ !greetingValid }
+                        onClick={ () => this.onGreetClicked() } > Grüßchen
+                        </button> 
+                    );
+                }
+                render:function GreetingDialog(){
+                    return(
+                        <div>
+                        <span style={{backgroundColor:"#FFCDD2", fontSize:"2rem", color:"White", fontWeight:"bold"}}>First React Page</span>
+                        <form > 
+                            <span>Whaaasup: </span>
+                            <InputField />
+                            <ButtonSend />
+                            <RemainingChars />
                         </form>
-                    </div>
-                 );
+                        </div>
+                    );
+                }
+                //  );
             }
-        }
+        // }
+               
+        // Componenten aufteilen ab hier: 
+
+       
+            // function RemainingChars(props){
+            //     return(
+            //     <span className={!greetingValid?"break" : ""}
+            //         style={{color:this.hasRemainingChars() ? 'green' : '#ff0000', fontSize:"1.2rem"}} >
+            //         {this.getCharsRemaining()} chars remaining
+            //     </span> 
+            //     );
+            // }
+       
+        // class InputField extends React.Component{
+        //     render(){
+        //         return();
+        //     }
+        // }
+        //Componenten aufteilen bis hier
         ReactDOM.render(<Greeter  maxLength={10}/>, document.getElementById('greeterMountPoint'));
         
     </script>
