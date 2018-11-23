@@ -15,7 +15,7 @@ class RemainingChars extends Component {
         console.log(this.props.maxLength);
         console.log(this.state.greeting.length);
         console.log("laenge");
-        let charlength = this.props.maxLength - this.state.greeting.length;
+        let charlength = this.props.maxLength - this.props.currentLength;
         if (charlength < 0) {
             charlength = 0;
         }

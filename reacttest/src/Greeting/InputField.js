@@ -11,10 +11,11 @@ class InputField extends Component {
     }
 
     onGreetingChange(event) {
+        const text=event.target.value;
         this.setState({
-            greeting: event.target.value
-
+            greeting: text
         });
+        this.props.greeter.setGreeting(text);
     }
 
     getCharsRemaining(){
