@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import NeuesElement from './NeuesElement'
 import './App.css';
 
 class App extends Component {
   render() {
     return (
+      <div>
+      <NeuesElement />
       <div className="App">
+      <NeuesElement />
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
@@ -20,6 +24,8 @@ class App extends Component {
             Learn React
           </a>
         </header>
+        <NeuesElement />
+      </div>
       </div>
     );
   }
