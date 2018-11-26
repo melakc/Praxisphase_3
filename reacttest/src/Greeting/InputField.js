@@ -21,8 +21,6 @@ class InputField extends Component {
     getCharsRemaining(){
         //wie debugging nur leichter
         console.log(this.props.maxLength);
-        console.log(this.state.greeting.length);
-        console.log("TestingGetCharsRemaining");
         let charlength=this.props.maxLength - this.state.greeting.length;
 
         if(charlength < 0){

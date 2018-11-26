@@ -155,7 +155,7 @@ class Greeter extends React.Component {
     //         }
     //     }
 // }
-       
+}      
 ReactDOM.render(<Greeter  maxLength={10}/>, document.getElementById('greeterMountPoint'));
 
 document.write("test");
