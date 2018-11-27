@@ -1,44 +1,51 @@
 
-function InputField(event) {
+function changeColorOfInput(event) {
 
     var input = document.getElementById("nameInput");
+    var inputButton = document.getElementById("buttonSend");
     console.log(event.key + "=>" + String.fromCharCode(event.keyCode));
     if (input.value == "") {
         input.style.backgroundColor = "#aac4f1";
+        inputButton.disabled = true;
     }
     else {
         input.style.backgroundColor = "#FFCDD2";
+        inputButton.disabled = false;
     }
 }
 
 function ButtonSend() {
-        var input = document.getElementById("nameInput").value;
-        alert(`Hallo, ${input}`);
-}
-//  AUsgabe der noch übrigen erlaubten Zeichen=> zählt runter 
-function RemainingChars() {
-    // characterCount(document.getElementById('nameInput'), {
-    //     max:10,
-    //     output:document.getElementById('charsLeft'),
-    // })
-    // $(function(){
-    //     $('#nameInput').on("change", function(){
-    //         var count=$("input:text[value='']").length;
-    //         alert(count);
-    //     });
-    // });
-    // $(document).ready(function() {
-    //     var text_max = 10;
-    //     $('input').html(text_max + ' characters remaining');
+    var input = document.getElementById("nameInput");
+    alert(`Hallo, ${input.value}`);
 
-    //     $('input').on('keyup',function() {
-    //         var text_length = $('input').val().length;
-    //         var text_remaining = text_max - text_length;
-
-    //         $('input').html(text_remaining + ' characters remaining');
-    //     });
-    // });
 }
+
+function onKeyUp(event) {
+    changeColorOfInput(event);
+    countDownRemainingChars();
+}
+
+function countDownRemainingChars() {
+    var input, countRemaining, counter, charsRemainingText;
+    var inputElement = document.getElementById("nameInput");
+    input = inputElement.value;
+    var maxlength = inputElement.getAttribute("maxlength");
+    console.log(`maxLength: ${maxlength}`);
+    counter = (maxlength - (input.length));
+    countRemaining = document.getElementById("charsLeft");
+    charsRemainingText = document.getElementById("charsRemaining");
+    countRemaining.textContent = counter;
+    if (counter <= maxlength && counter > 0) {
+        countRemaining.style.color = "green";
+        charsRemainingText.style.color = "green";
+    }
+    else {
+        countRemaining.style.color = "red";
+        charsRemainingText.style.color = "red";
+    }
+
+}
+
 
 
 

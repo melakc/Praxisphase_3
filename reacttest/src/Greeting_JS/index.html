@@ -6,7 +6,7 @@
     <script src="index.js"></script>
     <link rel="stylesheet" href="index.css" />
     <title>Hello! </title>
-    
+
 </head>
 
 <body>
@@ -14,9 +14,9 @@
     <div>
         <form>
             <span> Whaaaasup: </span>
-            <input type="text" id="nameInput" onfocus="InputField(event)" onkeyup="InputField(event)" maxlength="10" />
-            <button type="submit" id="buttonSend" onclick="ButtonSend()">Grüßchen</button>
-            <span id="charsLeft"> chars remaining</span>
+            <input type="text" id="nameInput" onfocus="onKeyUp(event)" onkeyup="onKeyUp(event)" maxlength="10" />
+            <button type="submit" id="buttonSend" onclick="ButtonSend()" disabled="disabled">Grüßchen</button>
+            <span id="charsLeft"> 10 </span> <span id="charsRemaining">chars remaining</span>
 
         </form>
 
