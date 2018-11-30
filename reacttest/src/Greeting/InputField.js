@@ -2,46 +2,43 @@ import React, { Component } from 'react';
 import './InputField.css';
 
 class InputField extends Component {
-    constructor(props){
-            super(props);
-            this.state= {
-                greeting: ''
+    constructor(props) {
+        super(props);
+        this.state = {
+            greeting: ''
         }
-  
     }
 
     onGreetingChange(event) {
-        const text=event.target.value;
+        const text = event.target.value;
         this.setState({
             greeting: text
         });
         this.props.greeter.setGreeting(text);
     }
 
-    getCharsRemaining(){
-        //wie debugging nur leichter
+    getCharsRemaining() {
         console.log(this.props.maxLength);
-        let charlength=this.props.maxLength - this.state.greeting.length;
+        let charlength = this.props.maxLength - this.state.greeting.length;
 
-        if(charlength < 0){
+        if (charlength < 0) {
             charlength = 0;
         }
 
         return charlength;
     }
 
-    isGreetingValid(){
+    isGreetingValid() {
         return (this.state.greeting.length > 0 && this.getCharsRemaining() >= 0);
     }
     render() {
         const greetingValid = this.isGreetingValid();
-        return(
-            <input 
+        return (
+            <input
                 maxLength={this.props.maxLength}
-                className={greetingValid ? 'valid':'invalid'} 
+                className={greetingValid ? 'valid' : 'invalid'}
                 value={this.state.greeting}
-                onChange={(e)=>this.onGreetingChange(e)}
-                // ref= { (c) =>  this.inputField = c }
+                onChange={(e) => this.onGreetingChange(e)}
             />
         );
     }

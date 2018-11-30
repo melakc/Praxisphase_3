@@ -3,18 +3,15 @@ import React, { Component } from 'react';
 
 class RemainingChars extends Component {
     constructor(props) {
-            super(props);
-            this.state = {
-                greeting: ''
-            }
+        super(props);
+        this.state = {
+            greeting: ''
+        }
 
     }
 
     getCharsRemaining() {
-        //wie debugging nur leichter
-        console.log(this.props.maxLength);
-        console.log(this.state.greeting.length);
-        console.log("laenge");
+
         let charlength = this.props.maxLength - this.props.currentLength;
         if (charlength < 0) {
             charlength = 0;
@@ -23,7 +20,6 @@ class RemainingChars extends Component {
         return charlength;
     }
     hasRemainingChars() {
-        console.log("callingHasRemChars");
         return this.getCharsRemaining() > 0;
     }
     isGreetingValid() {
